@@ -84,6 +84,9 @@ pipeline {
         }
     }
     post {
+        environment { 
+            CANARY_REPLICAS = 1
+        }
         cleanup {
             kubernetesDeploy (
                 kubeconfigId: 'kubeconfig',
