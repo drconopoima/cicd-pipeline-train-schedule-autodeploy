@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE_NAME = "drconopoima/train-schedule"
+        CANARY_REPLICAS = 0
     }
     stages {
         stage('Build') {
@@ -85,9 +86,6 @@ pipeline {
     }
     post {
         cleanup {
-            environment { 
-                CANARY_REPLICAS = 1
-            }
             kubernetesDeploy (
                 kubeconfigId: 'kubeconfig',
                 configs: 'train-schedule-kube-canary.yml',
