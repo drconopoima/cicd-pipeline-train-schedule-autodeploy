@@ -84,10 +84,10 @@ pipeline {
         }
     }
     post {
-        environment { 
-            CANARY_REPLICAS = 1
-        }
         cleanup {
+            environment { 
+                CANARY_REPLICAS = 1
+            }
             kubernetesDeploy (
                 kubeconfigId: 'kubeconfig',
                 configs: 'train-schedule-kube-canary.yml',
